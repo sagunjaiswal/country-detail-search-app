@@ -1,38 +1,35 @@
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+
+.card {
+  margin: 0 auto;
+  float: none;
+  font-style: italic;
+  color: #574b90;
+}
+.heading {
+  font-family: "Monoton", cursive;
+  font-size: 35px;
+  line-height: 140px;
+  letter-spacing: 4px;
   text-align: center;
+  color: #071a52;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.search-bar {
+  width: 30%;
+  padding: 10px;
+  border: 2px solid #17b978;
+  color: #17b978;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
+  margin-left: 30%;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.search-bar:focus {
+  outline-color: #071a52 !important;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-btn {
+  width: 5%;
+  padding: 10px 20px;
+  background-color: #fc85ae;
+  box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+  border-radius: 10px;
 }
