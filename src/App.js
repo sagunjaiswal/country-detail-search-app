@@ -5,7 +5,7 @@ import CountryFinder from "./CountryFinder";
 
 function App() {
   return (
-    <div>
+    <div className="App" style={{ height: "100vh", width: "100vw" }}>
       <CountryFinder />
     </div>
   );

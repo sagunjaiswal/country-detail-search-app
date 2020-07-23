@@ -1,5 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
-
+.App,
+.card {
+  background-image: repeating-linear-gradient(
+      90deg,
+      rgba(238, 238, 238, 0.5) 0px,
+      rgba(238, 238, 238, 0.5) 20px,
+      transparent 20px,
+      transparent 40px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(238, 238, 238, 0.5) 0px,
+      rgba(238, 238, 238, 0.5) 20px,
+      transparent 20px,
+      transparent 40px
+    ),
+    linear-gradient(90deg, #ffffff, #ffffff);
+}
 .card {
   margin: 0 auto;
   float: none;
@@ -9,14 +26,14 @@
 .heading {
   font-family: "Monoton", cursive;
   font-size: 35px;
-  line-height: 140px;
+  line-height: 40px;
   letter-spacing: 4px;
   text-align: center;
   color: #071a52;
 }
 .search-bar {
   width: 30%;
-  padding: 10px;
+  padding: 5px;
   border: 2px solid #17b978;
   color: #17b978;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
@@ -28,6 +45,7 @@
 }
 .search-btn {
   width: 4rem;
+
   padding: 10px 20px;
   background-color: #fc85ae;
   box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);

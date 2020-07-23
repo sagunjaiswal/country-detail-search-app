@@ -2,34 +2,45 @@ import React from "react";
 import "./App.css";
 import "./bootstrap.min.css";
 import axios from "axios";
-import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/Card";
-import ListGroupItem from "react-bootstrap/Card";
+import CountryContentsCard from "./CountryContentsCard";
 export default class CountryFlagFinder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       searchInput: "",
       countryDetails: {},
+      currencyDetails: "",
+      languageDetails: "",
     };
     this.submitHandler = this.submitHandler.bind(this);
   }
 
   submitHandler(e) {
     e.preventDefault();
-    console.log(this.state.searchInput);
     axios
       .get("http://restcountries.eu/rest/v2/all")
       .then((res) => {
-        // console.log(res.data);
         let countryDataArray = res.data;
 
         countryDataArray.forEach((element) => {
+          /*so that whatever may be the case of input "India" or "INDia" we will still get the result*/
           if (
             element.name.toUpperCase() == this.state.searchInput.toUpperCase()
           ) {
-            console.log(element);
             this.setState({ countryDetails: element });
+
+            this.state.countryDetails.currencies.forEach((currency) => {
+              var x = Object.entries(currency)[1];
+              this.setState({ currencyDetails: x[1] });
+            });
+            var languageArray = this.state.countryDetails.languages.map(
+              (lang) => {
+                var x = Object.entries(lang)[2];
+                return x[1];
+              }
+            );
+
+            this.setState({ languageDetails: languageArray.join(", ") });
           }
         });
       })
@@ -38,7 +49,7 @@ export default class CountryFlagFinder extends React.Component {
       });
   }
   render() {
-    const { countryDetails } = this.state;
+    const { countryDetails, currencyDetails, languageDetails } = this.state;
     return (
       <div>
         <h1 className="heading">COUNTRY DETAIL SEARCH APP</h1>
@@ -56,35 +67,21 @@ export default class CountryFlagFinder extends React.Component {
         </form>
         {Object.keys(countryDetails).length > 0 ? (
           <div className="card">
-            <Card style={{ width: "18rem" }}>
-              <Card.Img variant="top" src={countryDetails.flag} />
-              <Card.Body>
-                <Card.Title>{countryDetails.name}</Card.Title>
-                <Card.Text>{`CAPITAL : ${countryDetails.capital}`}</Card.Text>
-              </Card.Body>
-              <ListGroup className="list-group-flush">
-                <ListGroupItem>{`SUB-REGION : ${countryDetails.subregion}`}</ListGroupItem>
-                <ListGroupItem>
-                  CURRENCY :
-                  {countryDetails.currencies.forEach((currency) => {
-                    return <div>{currency.name}</div>;
-                  })}
-                </ListGroupItem>
-                <ListGroupItem>
-                  MAIN LANGUAGES :
-                  {countryDetails.languages.forEach((currency) => {
-                    return <div>{currency.name}</div>;
-                  })}
-                </ListGroupItem>
-              </ListGroup>
-              <Card.Body></Card.Body>
-            </Card>
+            <CountryContentsCard
+              countryDetails={countryDetails}
+              currencyDetails={currencyDetails}
+              languageDetails={languageDetails}
+            />
           </div>
         ) : (
-          <p style={{ fontSize: "15px" }}>
-            *please enter the full country name with correct spelling in the
-            input box
-          </p>
+          <div style={{ fontSize: "15px" }}>
+            *please enter the full country name in the input box
+            <ul style={{ fontWeight: "lighter" }}>
+              <li>Make sure your internet connection is on.</li>
+              <li>The spelling of the country must be correct</li>
+              <li>Write full country names</li>
+            </ul>
+          </div>
         )}
       </div>
     );
